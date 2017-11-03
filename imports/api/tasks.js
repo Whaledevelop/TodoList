@@ -4,8 +4,6 @@ import { check  } from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
 
-console.log (Meteor);
-
 const checkAutorization = () => {
   if (!Meteor.userId()) {
     alert ('You are not authorized')
@@ -27,8 +25,8 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   'tasks.insert' (text) {
-    check(text, String);
     checkAutorization();
+    check(text, String);
     Tasks.insert ({
       text,
       createdAt: new Date(),
@@ -40,23 +38,18 @@ Meteor.methods({
     checkAutorization();
     check(taskId, String);
     const task = Tasks.findOne(taskId);
-    (task.owner === Meteor.userId())   
+    (Meteor.user().username === task.username || Meteor.user().username === 'Admin')   
       ? Tasks.remove(taskId) 
       : alert ('You can\'t remove someone else\'s task');
   },
   'tasks.setChecked'(taskId, setChecked) {
+    console.log (Meteor.user().username);
     checkAutorization();
     check(taskId, String);
     check(setChecked, Boolean);
     const task = Tasks.findOne(taskId);
-    (task.owner === Meteor.userId()) 
+    (Meteor.user().username === task.username || Meteor.user().username === 'Admin' ) 
       ? Tasks.update(taskId, { $set: {checked: setChecked} })
       : alert ('You can\'t operate with someone else\'s task');
-  },
-  'tasks.setPrivate'(taskId, setToPrivate) {
-    checkAutorization();
-    check(taskId, String);
-    check(setToPrivate, Boolean);
-    Tasks.update(taskId, { $set: {private: setToPrivate} })
   }
 });
