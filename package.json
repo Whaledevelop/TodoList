@@ -7,10 +7,12 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "bcrypt": "^1.0.3",
+    "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.0.0",
     "react-addons-pure-render-mixin": "^15.6.2",
+    "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0"
   }
 }

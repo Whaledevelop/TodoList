@@ -11,25 +11,18 @@ const checkAutorization = () => {
   } 
 }
 
-
 if (Meteor.isServer) {
-  Meteor.publish('tasks', function tasksPublication() {
-    return Tasks.find({
-      $or: [
-        { private: { $ne: true } },
-        { owner: this.userId },
-      ],
-    });
-  });
+  Meteor.publish('tasks', () => Tasks.find());
 }
 
 Meteor.methods({
-  'tasks.insert' (text) {
+  'tasks.insert' (text, dueDate) {
     checkAutorization();
     check(text, String);
     Tasks.insert ({
       text,
       createdAt: new Date(),
+      dueDate: dueDate,
       owner: Meteor.userId(),
       username: Meteor.user().username  
     })
@@ -43,7 +36,6 @@ Meteor.methods({
       : alert ('You can\'t remove someone else\'s task');
   },
   'tasks.setChecked'(taskId, setChecked) {
-    console.log (Meteor.user().username);
     checkAutorization();
     check(taskId, String);
     check(setChecked, Boolean);

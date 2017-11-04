@@ -1,5 +1,7 @@
 import React, { Component} from 'react';
 import { Meteor } from 'meteor/meteor'
+import '../css/fa/css/font-awesome.min.css'
+import '../css/themify-icons/themify-icons.css'
 
 import {Tasks} from '../api/tasks'
  
@@ -28,9 +30,11 @@ class Task extends Component {
         <td>
           {this.props.task.text}
         </td>
+        <td></td>
         <td>
-          <i className="fa fa-times-circle-o" onClick = {this.deleteTask.bind(this)}></i>
-          <i className="fa fa-window-close" aria-hidden="true"></i>
+          <button className="delete" onClick={this.deleteTask.bind(this)}>
+            &times;
+          </button>
         </td>  
       </tr>
     );

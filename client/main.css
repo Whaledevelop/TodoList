@@ -1,19 +1,14 @@
-header {
-  height: 200px;
-}
-
-
 .delete {
-  float: right;
   font-weight: bold;
   background: none;
-  font-size: 1em;
+  font-size: 1.4em;
   border: none;
-  position: relative;
 }
 
- 
-header .hide-completed {
-  float: right;
+td:first-child, th:first-child {
+	width: 4%
 }
- 
+
+td:last-child, th:last-child {
+	width: 8%
+}
