@@ -48,10 +48,6 @@ class AddForm extends Component {
     })
   }
 
-  inputColor() {
-
-  }
-
   render() {
     return (
       <form onSubmit={this.handleSubmit}>

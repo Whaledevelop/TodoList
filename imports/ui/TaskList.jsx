@@ -1,21 +1,10 @@
 import React, {Component} from 'react'
 import {Table, ControlLabel, FormControl, FormGroup } from 'react-bootstrap'
-import { Meteor } from 'meteor/meteor'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import moment from 'moment';
+import { TransitionGroup } from 'react-transition-group'
 
-import {firstLetterUpperCase} from '../modules/firstLetterUpperCase'
 import '../../client/main.css'
-
-const Fade = ({ children, ...props }) => (
-  <CSSTransition
-    {...props}
-    timeout={1000}
-    classNames="fade"
-  >
-    {children}
-  </CSSTransition>
-);
+import Task from './Task'
+import {Fade} from './Fade'
 
 class TaskList extends Component {
   constructor(props) {
@@ -37,57 +26,12 @@ class TaskList extends Component {
       filteredTasks.map(task => {
         const {_id, done, owner, dueDate, username, text} = task
         return (
-          <Fade key={_id}>
-            <tr className={this.taskStatus(done, dueDate)}>
-              <td>{this.renderCheckbox(_id, done, owner)}</td>
-              <td><strong>{username}</strong></td>
-              <td>{firstLetterUpperCase(text)}</td>
-              <td>{this.renderDueDate(dueDate)}</td>
-              <td><button className="delete" onClick={() => this.deleteTask(_id)}>&times;</button></td>   
-            </tr>
+          <Fade key={task._id}>
+            <Task task={task}/>
           </Fade>
         )
       })
     )
-  }
-
-  taskStatus(done, dueDate) {
-    if (done) {
-      return 'success'
-    } else if (moment()._d > moment(dueDate)._d) {
-        return 'danger'
-    } else if (moment()._d > moment(dueDate).subtract(1, 'd')._d) {
-      return 'warning'
-    } 
-  }
-
-  renderCheckbox(id, done, owner) {
-    if (Meteor.userId() === null) {
-      return ''
-    } else if (Meteor.userId() === owner){
-      return (
-        <input
-          type="checkbox"
-          readOnly
-          onClick = {() => this.toggleDone(id, done)}/>
-      ) 
-    }
-  }
-
-  toggleDone(id, done) {
-    Meteor.call('tasks.setDone', id, !done);
-  }
-
-  renderDueDate(dueDate) {
-    return (
-      dueDate.split('T')[1] === '23:59'
-      ? moment(dueDate).format('DD MMMM')
-      : moment(dueDate).format('DD MMMM - HH:mm')
-    )   
-  }
-
-  deleteTask(id) {
-    Meteor.call('tasks.remove', id);
   }
 
   toggleShownTasks(e) {
@@ -114,7 +58,7 @@ class TaskList extends Component {
               <th>Автор</th>
               <th>Задача</th>
               <th>Срок выполнения</th>
-              <th>Удалить</th>
+              <th></th>
             </tr>
           </thead>
           <TransitionGroup component = "tbody">

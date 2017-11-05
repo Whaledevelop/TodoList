@@ -25,15 +25,8 @@ Meteor.methods({
     }   
   },
   'tasks.remove' (taskId) {
-    if (!Meteor.userId()) {
-      alert ('You are not authorized')
-    } else {
     check(taskId, String);
-    const task = Tasks.findOne(taskId);
-    (Meteor.user().username === task.username || Meteor.user().username === 'Admin')   
-      ? Tasks.remove(taskId) 
-      : alert ('You can\'t remove someone else\'s task');
-    }
+    Tasks.remove(taskId) 
   },
   'tasks.setDone'(taskId, setDone) {
     check(taskId, String);

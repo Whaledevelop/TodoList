@@ -8,9 +8,18 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openAddForm: false
+      openAddForm: false,
+      errorMessage: ''
     }
     this.handleOpenAddForm = this.handleOpenAddForm.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser) {
+      this.setState({
+        errorMessage: ''
+      })
+    }
   }
 
   handleOpenAddForm() {
@@ -18,7 +27,11 @@ class Header extends Component {
       this.setState({
         openAddForm: !this.state.openAddForm
       })
-    } else alert('You are not authorized to add tasks') 
+    } else {
+      this.setState({
+        errorMessage: 'Authorize to add tasks'
+      })
+    } 
   }
 
   openFormButtonClassName() {
@@ -39,6 +52,7 @@ class Header extends Component {
           <Panel collapsible expanded={this.state.openAddForm}>  
             <AddForm/>
           </Panel>
+          <h2 style={{color: 'red'}}>{this.state.errorMessage}</h2>
         </div>        
       </header>
     )

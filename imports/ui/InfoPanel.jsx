@@ -22,7 +22,7 @@ class InfoPanel extends Component {
             Информация для Milk&Cartoons
           </a>
           <Panel collapsible expanded={this.state.openInfo}>
-            <p>Пароль для входа в аккаунт Admin - 123456, User - 123456. Admin может выполнять операции со всеми задачами, User и новый аккаунты только со своими задачами</p>
+            <p>Пароль для входа в аккаунт Admin - 123456, User - 123456. Admin может выполнять операции со всеми задачами (ставить выполнение и удалять), User и новый аккаунты только со своими</p>
           </Panel>
         </div>
       </div>
