@@ -5,7 +5,6 @@ import {dateInterpratator} from './interpratators/dateInterpratator'
 
 export const dueDateFromText = (text) => {
   const textObj = text.toLowerCase().split(' ').filter(item=> item !== '')
-  console.log (textObj);
   const {time, numbers} = timeInterpratator(textObj)
   const {date, codeWord} = dateInterpratator(textObj)
   if (time === undefined & date === undefined) {

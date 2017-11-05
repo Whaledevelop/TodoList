@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Table, ControlLabel, FormControl, FormGroup } from 'react-bootstrap'
+
 import Task from './Task'
+import '../../client/main.css'
 
 class TaskList extends Component {
   constructor(props) {
@@ -25,13 +27,13 @@ class TaskList extends Component {
       filteredTasks = filteredTasks.filter(task => !task.checked)
     }
     return (
-      filteredTasks.map(task => {
-        return (
+      filteredTasks.map(task => (
+        <Fade key={task}
           <Task 
             key={task._id} 
             task={task}/>
         )    
-      })
+      )
     )
   }
 
@@ -56,9 +58,9 @@ class TaskList extends Component {
               <th>Удалить</th>
             </tr>
           </thead>
-          <tbody>
+          <TransitionGroup component = "tbody">
             {this.renderTasks()}
-          </tbody>
+          </TransitionGroup> 
         </Table>
       </div>
       

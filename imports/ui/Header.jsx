@@ -27,7 +27,7 @@ class Header extends Component {
 
   render() {
     return (
-      <header style={{height: '90px'}}>
+      <header style={{height: '115px'}}>
         <InfoPanel/>
         <div style={{position: 'absolute', top: '10px', left: '37%', width: '26%'}}>
           <div

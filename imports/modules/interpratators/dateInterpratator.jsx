@@ -4,7 +4,6 @@ export const dateInterpratator = (textObj) => {
   const codeWord = textObj.find(word => {
     return word === 'завтра' || word === 'сегодня'
   })
-  console.log (codeWord);
   const date = undefined;
   if (codeWord === 'завтра') {
     return {

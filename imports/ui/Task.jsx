@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
-import { Meteor } from 'meteor/meteor'
-import moment from 'moment'
+import { Meteor } from 'meteor/meteor';
+import moment from 'moment';
 
 import {Tasks} from '../api/tasks'
 import {firstLetterUpperCase} from '../modules/firstLetterUpperCase'
@@ -50,24 +50,12 @@ class Task extends Component {
     const {owner, username, text, dueDate} = this.props.task;
     return (
       <tr className={this.taskStatus()}>
-        <td>
-          {this.renderCheckbox(owner)}    
-        </td>
-        <td>
-          <strong>{username}</strong>
-        </td>
-        <td>
-          {firstLetterUpperCase(text)}
-        </td>
-        <td>
-          {this.renderDueDate(dueDate)}
-        </td>
-        <td>
-          <button className="delete" onClick={this.deleteTask.bind(this)}>
-            &times;
-          </button>
-        </td>  
-      </tr>
+        <td>{this.renderCheckbox(owner)}</td>
+        <td><strong>{username}</strong></td>
+        <td>{firstLetterUpperCase(text)}</td>
+        <td>{this.renderDueDate(dueDate)}</td>
+        <td><button className="delete" onClick={this.deleteTask.bind(this)}>&times;</button></td>   
+       </tr>
     );
   }
 }

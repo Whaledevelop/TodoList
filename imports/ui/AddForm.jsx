@@ -10,7 +10,8 @@ class AddForm extends Component {
     this.state = {
       text: '',
       dueDate: '',
-      info: ''
+      info: '',
+      infoColor: 'black'
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -18,28 +19,44 @@ class AddForm extends Component {
 
   handleSubmit(e) {
     const {text, dueDate, info} = this.state;
-    if (info === 'Нажмите enter') {
-      e.preventDefault(); 
+    e.preventDefault();
+    if (info === 'Нажмите enter') { 
       Meteor.call('tasks.insert', text, dueDate);
       e.target.input.value = ''
-    } else alert('Write correct task with correct dueDate')
+      this.setState({
+        text: '',
+        dueDate: '',
+        info: '',
+        infoColor: 'black'
+      })
+    } else {
+      this.setState({infoColor: 'red'})
+    }
   }
 
   handleInput(e) {
     const {taskText, dueDate, info} = dueDateFromText(e.target.value);  
-    console.log (taskText, dueDate, info);
+    let infoColor = 'black';
+    if (info === 'Нажмите enter') {
+      infoColor = 'blue'
+    }
     this.setState({ 
       text: taskText,
       dueDate: dueDate,
-      info: info
+      info: info, 
+      infoColor: infoColor
     })
+  }
+
+  inputColor() {
+
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <FormGroup>
-          <ControlLabel>{this.state.info}</ControlLabel>
+          <ControlLabel style={{color: `${this.state.infoColor}`}}>{this.state.info}</ControlLabel>
           <FormControl
             id="input"
             type="text"
