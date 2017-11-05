@@ -35,9 +35,9 @@ Meteor.methods({
       : alert ('You can\'t remove someone else\'s task');
     }
   },
-  'tasks.setChecked'(taskId, setChecked) {
+  'tasks.setDone'(taskId, setDone) {
     check(taskId, String);
-    check(setChecked, Boolean);
-    Tasks.update(taskId, { $set: {checked: setChecked} })
+    check(setDone, Boolean);
+    Tasks.update(taskId, { $set: {done: setDone} })
   }
 });
