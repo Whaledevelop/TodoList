@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Table, ControlLabel, FormControl, FormGroup } from 'react-bootstrap'
 import { TransitionGroup } from 'react-transition-group'
 
-import '../../client/main.css'
 import Task from './Task'
 import {Fade} from './Fade'
 

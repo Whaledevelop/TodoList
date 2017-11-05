@@ -3,7 +3,7 @@ import moment from 'moment'
 import {timeInterpratator} from './interpratators/timeInterpratator'
 import {dateInterpratator} from './interpratators/dateInterpratator'
 
-export const dueDateFromText = (text) => {
+export const inputInterpratator = (text) => {
   const textObj = text.toLowerCase().split(' ').filter(item=> item !== '')
   const {time, numbers} = timeInterpratator(textObj)
   const {date, codeWord} = dateInterpratator(textObj)

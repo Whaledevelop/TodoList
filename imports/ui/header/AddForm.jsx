@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
 import { Meteor } from 'meteor/meteor'
 
-import {dueDateFromText} from '../modules/dueDateFromText'
+import {inputInterpratator} from '../../modules/inputInterpratator'
 
 class AddForm extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class AddForm extends Component {
   }
 
   handleInput(e) {
-    const {taskText, dueDate, info} = dueDateFromText(e.target.value);  
+    const {taskText, dueDate, info} = inputInterpratator(e.target.value);  
     let infoColor = 'black';
     if (info === 'Нажмите enter') {
       infoColor = 'blue'

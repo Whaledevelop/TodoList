@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
 
-import {firstLetterUpperCase} from '../modules/firstLetterUpperCase'
+import {firstLetterUpperCase} from '../../modules/firstLetterUpperCase'
  
 class Task extends Component {
   taskStatus(done, dueDate) {

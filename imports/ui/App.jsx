@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor'
 import {withTracker} from 'meteor/react-meteor-data'
 
 import {Tasks} from '../api/tasks'
-import Header from './Header'
-import TaskList from './TaskList'
+import Header from './header/Header'
+import TaskList from './body/TaskList'
 
 class App extends Component {
   render () {
