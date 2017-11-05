@@ -10,19 +10,15 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   'tasks.insert' (text, dueDate) {
-    if (!Meteor.userId()) {
-      alert ('You are not authorized')
-    } else {
-      check(text, String);
-      check(dueDate, String);
-      Tasks.insert ({
-        text,
-        createdAt: new Date(),
-        dueDate: dueDate,
-        owner: Meteor.userId(),
-        username: Meteor.user().username  
-      })
-    }   
+    check(text, String);
+    check(dueDate, String);
+    Tasks.insert ({
+      text,
+      createdAt: new Date(),
+      dueDate: dueDate,
+      owner: Meteor.userId(),
+      username: Meteor.user().username  
+    }) 
   },
   'tasks.remove' (taskId) {
     check(taskId, String);
