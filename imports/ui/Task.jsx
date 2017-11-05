@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
 import { Meteor } from 'meteor/meteor'
-import '../css/fa/css/font-awesome.min.css'
-import '../css/themify-icons/themify-icons.css'
+import moment from 'moment'
 
 import {Tasks} from '../api/tasks'
+import {firstLetterUpperCase} from '../modules/firstLetterUpperCase'
  
 class Task extends Component {
   toggleChecked() {
@@ -14,23 +14,54 @@ class Task extends Component {
     Meteor.call('tasks.remove', this.props.task._id);
   }
 
-  render() {
+  renderDueDate(dueDate) {
     return (
-      <tr>
+      dueDate.split('T')[1] === '23:59'
+      ? moment(dueDate).format('DD MMMM')
+      : moment(dueDate).format('DD MMMM - HH:mm')
+    )   
+  }
+
+  taskStatus() {
+    const {checked, dueDate} = this.props.task;
+    if (checked) {
+      return 'success'
+    } else if (moment()._d > moment(dueDate)._d) {
+        return 'danger'
+    } else if (moment()._d > moment(dueDate).subtract(1, 'd')._d) {
+      return 'warning'
+    } 
+  }
+
+  renderCheckbox(owner) {
+    if (Meteor.userId() === null) {
+      return ''
+    } else if (Meteor.userId() === owner){
+      return (
+        <input
+        type="checkbox"
+        readOnly
+        onClick = {this.toggleChecked.bind(this)}/>
+      ) 
+    }
+  }
+
+  render() {
+    const {owner, username, text, dueDate} = this.props.task;
+    return (
+      <tr className={this.taskStatus()}>
         <td>
-          <input
-            type="checkbox"
-            readOnly
-            checked = {this.props.task.checked}
-            onClick = {this.toggleChecked.bind(this)}/>
+          {this.renderCheckbox(owner)}    
         </td>
         <td>
-          <strong>{this.props.task.username}</strong>
+          <strong>{username}</strong>
         </td>
         <td>
-          {this.props.task.text}
+          {firstLetterUpperCase(text)}
         </td>
-        <td></td>
+        <td>
+          {this.renderDueDate(dueDate)}
+        </td>
         <td>
           <button className="delete" onClick={this.deleteTask.bind(this)}>
             &times;

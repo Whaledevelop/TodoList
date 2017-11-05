@@ -19,14 +19,10 @@ class TaskList extends Component {
 
   renderTasks() {
     let filteredTasks = this.props.tasks;
-    switch (this.state.shownTasks) {
-      case 'done' : {
-        filteredTasks = filteredTasks.filter(task => task.checked)
-      }
-      case 'undone' : {
-        filteredTasks = filteredTasks.filter(task => !task.checked)
-      }
-      default : break
+    if (this.state.shownTasks === 'done') {
+      filteredTasks = filteredTasks.filter(task => task.checked)
+    } else if (this.state.shownTasks === 'undone') {
+      filteredTasks = filteredTasks.filter(task => !task.checked)
     }
     return (
       filteredTasks.map(task => {

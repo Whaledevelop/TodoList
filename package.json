@@ -9,6 +9,7 @@
     "bcrypt": "^1.0.3",
     "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",
+    "moment": "^2.18.1",
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.0.0",
     "react-addons-pure-render-mixin": "^15.6.2",
