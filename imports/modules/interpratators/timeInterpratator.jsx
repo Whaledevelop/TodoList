@@ -23,6 +23,6 @@ export const timeInterpratator = (textObj) => {
   }
   return {
     time: undefined,
-    numbers: numbers
+    numbers: undefined
   }
 }

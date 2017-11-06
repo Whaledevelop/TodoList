@@ -1,4 +1,5 @@
 import moment from 'moment'
+//import _ from 'lodash'
 
 import {timeInterpratator} from './interpratators/timeInterpratator'
 import {dateInterpratator} from './interpratators/dateInterpratator'
@@ -9,25 +10,20 @@ export const inputInterpratator = (text) => {
   const {date, codeWord} = dateInterpratator(textObj)
   if (time === undefined & date === undefined) {
     return {
-      dueDate: '',
       info: 'Укажите срок выполнения задачи'
     }
   } else {
-    let counterOfWordsForDueDate = 0
     if (time !== undefined & date === undefined) {
       date = moment().format('YYYY-MM-DD');
-      counterOfWordsForDueDate = 1
     } else if (time === undefined & date !== undefined) {
       time = '23:59';
-      counterOfWordsForDueDate = 1
-    } else if (time === undefined & date === undefined) {
-      counterOfWordsForDueDate = 2
-    }
+    } 
     const timePunctuation = textObj.find(item => {
       return item === 'в' || item === 'на'
     })
     let infoForDueDate = `${numbers}, ${codeWord}, ${timePunctuation}`.split(', ');
     infoForDueDate = infoForDueDate.filter(info => info !== 'undefined');
+    //const taskText = _.difference(infoForDueDate, textObj)
     let taskText = [];
     for (let i=0; i < textObj.length; i++) {
       if (infoForDueDate.indexOf(textObj[i]) === -1) {
@@ -36,8 +32,6 @@ export const inputInterpratator = (text) => {
     }
     if (infoForDueDate.length === textObj.length) {
       return {
-        taskText: taskText.join(' '),
-        dueDate: '',
         info: 'Добавьте какую-нибудь информацию о задаче кроме времени выполнения'
       } 
     } else {
