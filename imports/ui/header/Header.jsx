@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Panel} from 'react-bootstrap'
 
-import InfoPanel from './InfoPanel'
 import AddForm from './AddForm'
 
 class Header extends Component {
@@ -41,7 +40,6 @@ class Header extends Component {
   render() {
     return (
       <header style={{height: '115px'}}>
-        <InfoPanel/>
         <div style={{position: 'absolute', top: '10px', left: '37%', width: '26%'}}>
           <div
             style={{width: '100%', padding: '6px  0px'}}
