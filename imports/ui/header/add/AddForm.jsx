@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
 import { Meteor } from 'meteor/meteor'
 
-import {inputInterpratator} from '../../modules/inputInterpratator'
+import {inputInterpratator} from '../../../modules/inputInterpratator'
 
 class AddForm extends Component {
   constructor(props) {

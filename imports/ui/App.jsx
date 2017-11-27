@@ -4,14 +4,14 @@ import {withTracker} from 'meteor/react-meteor-data'
 
 import {Tasks} from '../api/tasks'
 import Header from './header/Header'
-import TaskList from './body/TaskList'
+import Body from './body/Body'
 
 class App extends Component {
   render () {
     return (
       <div className="container">
-        <Header currentUser={this.props.currentUser}/>
-        <TaskList tasks={this.props.tasks}/>
+        <Header currentUser={Meteor.user}/>
+        <Body tasks={this.props.tasks}/>
       </div>
     )
   }
@@ -20,7 +20,6 @@ class App extends Component {
 export default withTracker(() => {
   Meteor.subscribe('tasks');
   return {
-    tasks: Tasks.find({}, {sort: { createdAt: -1}}).fetch(),
-    currentUser: Meteor.user()
+    tasks: Tasks.find({}, {sort: { createdAt: -1}}).fetch()
   }
 })(App);
