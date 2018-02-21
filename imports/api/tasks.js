@@ -4,9 +4,7 @@ import { check  } from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
 
-if (Meteor.isServer) {
-  Meteor.publish('tasks', () => Tasks.find());
-}
+Meteor.isServer ? Meteor.publish('tasks', () => Tasks.find()) : null
 
 Meteor.methods({
   'tasks.insert' (text, dueDate) {

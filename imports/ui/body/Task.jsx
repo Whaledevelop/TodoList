@@ -1,25 +1,24 @@
 import React, { Component} from 'react';
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 import moment from 'moment';
 
 import {firstLetterUpperCase} from '../../modules/firstLetterUpperCase'
  
 class Task extends Component {
   taskStatus(done, dueDate) {
-    if (done) {
-      return 'success'
-    } else if (moment()._d > moment(dueDate)._d) {
-        return 'danger'
-    } else if (moment()._d > moment(dueDate).subtract(1, 'd')._d) {
-      return 'warning'
-    } 
+    return done 
+      ? 'success' : (
+        (moment()._d > moment(dueDate)._d) 
+        ? 'danger' : (
+          (moment()._d > moment(dueDate).subtract(1, 'd')._d) 
+          ? 'warning' : null
+        )
+      )
   }
 
   renderCheckbox(id, done, owner) {
-    if (Meteor.userId() === null) {
-      return ''
-    } else if (Meteor.userId() === owner || Meteor.user().username === 'Admin') {
-      return (
+    return (Meteor.userId() === owner || Meteor.user().username === 'Admin') ?
+      (
         <input
           type="checkbox"
           readOnly
@@ -27,8 +26,7 @@ class Task extends Component {
           onClick = {() => {
             Meteor.call('tasks.setDone', id, !done)
           }}/>
-      ) 
-    }
+      ) : '' 
   }
 
   renderDueDate(dueDate) {
@@ -40,15 +38,17 @@ class Task extends Component {
   }
 
   renderDeleteButton(id, owner) {
-    if (Meteor.userId() === null) {
-      return ''
-    } else if (Meteor.userId() === owner || Meteor.user().username === 'Admin') {
-      return (
-        <button className="delete" onClick={() => {
-          Meteor.call('tasks.remove', id);
-        }}>&times;</button>
-      )
-    } 
+    return (Meteor.userId() === owner || Meteor.user().username === 'Admin') ?
+      (
+        <button 
+          className="delete" 
+          onClick={() => {
+            Meteor.call('tasks.remove', id);
+          }}
+        >
+          &times;
+        </button>
+      ) : '' 
   }
 
   render () {

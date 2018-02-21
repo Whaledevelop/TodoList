@@ -1,7 +1,7 @@
 import moment from 'moment'
 
-export const dateInterpratator = (textObj) => {  
-  const codeWord = textObj.find(word => {
+export const dateInterpratator = (textArray) => {  
+  const codeWord = textArray.find(word => {
     return word === 'завтра' || word === 'сегодня'
   })
   const date = undefined;

@@ -35,7 +35,9 @@ class AddForm extends Component {
   }
 
   handleInput(e) {
+    console.log (e.target.value)
     const {taskText, dueDate, info} = inputInterpratator(e.target.value);  
+    console.log (taskText)
     let infoColor = 'black';
     if (info === 'Нажмите enter') {
       infoColor = 'blue'

@@ -1,9 +1,9 @@
-export const timeInterpratator = (textObj) => {
+export const timeInterpratator = (textArray) => {
   const numberOrNot = (item) => {
     const parsedItem = parseInt(item, 10);
     return !isNaN(parsedItem) ? true : false;
   }
-  const numbers = textObj.find(item => {
+  const numbers = textArray.find(item => {
       return numberOrNot(item)  
   })
   if (numbers !== undefined) {
